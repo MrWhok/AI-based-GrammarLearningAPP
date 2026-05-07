@@ -5,6 +5,7 @@ import '../../core/constants/grammar_topics.dart';
 import '../../core/theme/app_theme.dart';
 import '../../data/database/topic_progress.dart';
 import '../../shared/providers/app_providers.dart';
+import '../quiz/quiz_screen.dart';
 import '../theory/theory_screen.dart';
 
 class HomeScreen extends ConsumerWidget {
@@ -81,8 +82,17 @@ class HomeScreen extends ConsumerWidget {
                   ),
                 ),
               ),
+              // Mixed Practice banner
               SliverPadding(
-                padding: const EdgeInsets.fromLTRB(16, 16, 16, 8),
+                padding: const EdgeInsets.fromLTRB(16, 16, 16, 0),
+                sliver: SliverToBoxAdapter(
+                  child: _MixedQuizBanner(
+                    mixedProgress: progressMap['mixed_quiz'],
+                  ),
+                ),
+              ),
+              SliverPadding(
+                padding: const EdgeInsets.fromLTRB(16, 20, 16, 8),
                 sliver: SliverToBoxAdapter(
                   child: Text(
                     'Choose a Topic',
@@ -230,6 +240,137 @@ class _TopicCard extends StatelessWidget {
                 ],
               ),
             ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class _MixedQuizBanner extends StatelessWidget {
+  final TopicProgress? mixedProgress;
+
+  const _MixedQuizBanner({this.mixedProgress});
+
+  @override
+  Widget build(BuildContext context) {
+    final isCompleted = mixedProgress?.isCompleted ?? false;
+    final score = mixedProgress?.highScore ?? 0;
+    final total = mixedProgress?.totalQuestions ?? 40;
+    final pct = isCompleted ? (score / total * 100).round() : 0;
+
+    return Container(
+      decoration: BoxDecoration(
+        gradient: const LinearGradient(
+          begin: Alignment.topLeft,
+          end: Alignment.bottomRight,
+          colors: [Color(0xFFF57F17), Color(0xFFFFCA28)],
+        ),
+        borderRadius: BorderRadius.circular(16),
+        boxShadow: [
+          BoxShadow(
+            color: const Color(0xFFF57F17).withValues(alpha: 0.35),
+            blurRadius: 12,
+            offset: const Offset(0, 4),
+          ),
+        ],
+      ),
+      child: Material(
+        color: Colors.transparent,
+        child: InkWell(
+          borderRadius: BorderRadius.circular(16),
+          onTap: () => Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (_) => QuizScreen(topic: kMixedQuizTopic),
+            ),
+          ),
+          child: Padding(
+            padding: const EdgeInsets.all(16),
+            child: Row(
+              children: [
+                const Text('🏆', style: TextStyle(fontSize: 36)),
+                const SizedBox(width: 12),
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        'Mixed Practice Test',
+                        style: GoogleFonts.poppins(
+                          fontSize: 15,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.white,
+                        ),
+                      ),
+                      const SizedBox(height: 2),
+                      Text(
+                        '40 Questions • All 21 Topics',
+                        style: GoogleFonts.poppins(
+                          fontSize: 12,
+                          color: Colors.white70,
+                        ),
+                      ),
+                      const SizedBox(height: 6),
+                      Container(
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 8, vertical: 3),
+                        decoration: BoxDecoration(
+                          color: Colors.white.withValues(alpha: 0.25),
+                          borderRadius: BorderRadius.circular(20),
+                        ),
+                        child: const Text(
+                          'TOEFL / IELTS Ready',
+                          style: TextStyle(
+                            fontSize: 10,
+                            fontWeight: FontWeight.w600,
+                            color: Colors.white,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                const SizedBox(width: 8),
+                if (isCompleted)
+                  Column(
+                    children: [
+                      Text(
+                        '$pct%',
+                        style: GoogleFonts.poppins(
+                          fontSize: 22,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.white,
+                        ),
+                      ),
+                      Text(
+                        '$score/$total',
+                        style: const TextStyle(
+                          fontSize: 11,
+                          color: Colors.white70,
+                        ),
+                      ),
+                    ],
+                  )
+                else
+                  Container(
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 14, vertical: 8),
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(20),
+                    ),
+                    child: Text(
+                      'Start Test',
+                      style: GoogleFonts.poppins(
+                        fontSize: 12,
+                        fontWeight: FontWeight.w600,
+                        color: const Color(0xFFF57F17),
+                      ),
+                    ),
+                  ),
+              ],
+            ),
           ),
         ),
       ),

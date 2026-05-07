@@ -121,25 +121,13 @@ class _QuizScreenState extends ConsumerState<QuizScreen> {
           Text(widget.topic.emoji, style: const TextStyle(fontSize: 56)),
           const SizedBox(height: 24),
           const CircularProgressIndicator(),
-          const SizedBox(height: 16),
+          const SizedBox(height: 24),
           Text(
-            'Generating your quiz...',
+            'Generating your quiz…',
             style: GoogleFonts.poppins(
               fontSize: 16,
               color: Colors.grey.shade600,
             ),
-          ),
-          const SizedBox(height: 8),
-          Text(
-            'AI is preparing 20 questions on\n${widget.topic.title}',
-            textAlign: TextAlign.center,
-            style: TextStyle(fontSize: 13, color: Colors.grey.shade500),
-          ),
-          const SizedBox(height: 6),
-          Text(
-            '(if rate-limited, retries automatically)',
-            textAlign: TextAlign.center,
-            style: TextStyle(fontSize: 11, color: Colors.grey.shade400),
           ),
         ],
       ),

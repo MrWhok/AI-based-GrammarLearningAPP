@@ -115,7 +115,7 @@ lib/
 ├── core/
 │   ├── constants/
 │   │   ├── api_constants.example.dart   # Template — copy to api_constants.dart
-│   │   └── grammar_topics.dart          # All 15 topics with theory content
+│   │   └── grammar_topics.dart          # All 21 topics with theory content
 │   └── theme/
 │       └── app_theme.dart
 ├── data/
