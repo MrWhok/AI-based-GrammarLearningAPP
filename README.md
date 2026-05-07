@@ -4,6 +4,35 @@ A Flutter app for learning English grammar through structured theory and AI-gene
 
 ---
 
+## Screenshots
+
+- Home Screen
+> Browse 15 topic cards with scores
+
+![alt text](screenshots/home.png)
+
+- Theory Screen
+> Read grammar rules & examples
+
+![alt text](screenshots/theory.png)
+
+- Quiz in Progress
+> Answer AI-generated questions
+
+![alt text](screenshots/quiz.png)
+
+- Wrong Answer Explanation 
+> Bottom sheet explains the rule
+
+![alt text](screenshots/explanation.png)
+
+- Results Screen
+> Score, accuracy & mistake review
+
+![alt text](screenshots/results.png)
+
+---
+
 ## Features
 
 - **15 grammar topics** — Present Simple through Relative Clauses, each with structured theory, key rules, and examples
@@ -33,7 +62,7 @@ A Flutter app for learning English grammar through structured theory and AI-gene
 
 - Flutter SDK >= 3.0
 - Android Studio or VS Code with Flutter extension
-- A free [Groq API key](https://console.groq.com)
+- A free **[Groq API key](https://console.groq.com)**
 
 ### 1. Clone and install dependencies
 
