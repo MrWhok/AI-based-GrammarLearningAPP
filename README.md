@@ -7,7 +7,7 @@ A Flutter app for learning English grammar through structured theory and AI-gene
 ## Screenshots
 
 - Home Screen
-> Browse 15 topic cards with scores
+> Browse 21 topic cards with scores
 
 ![alt text](screenshots/home.png)
 
@@ -35,7 +35,7 @@ A Flutter app for learning English grammar through structured theory and AI-gene
 
 ## Features
 
-- **15 grammar topics** — Present Simple through Relative Clauses, each with structured theory, key rules, and examples
+- **21 grammar topics** — Present Simple through Relative Clauses, each with structured theory, key rules, and examples
 - **AI-powered quizzes** — 20 multiple-choice questions generated on demand by Llama 3.3 via Groq
 - **Instant explanations** — wrong answers trigger a bottom sheet with the correct answer and a grammar rule explanation
 - **Local progress tracking** — scores and completion status saved with Isar (no cloud, no account required)
@@ -99,7 +99,7 @@ flutter run
 
 ## How to Use
 
-1. **Home screen** — browse the 15 topic cards. Completed topics show your best score percentage.
+1. **Home screen** — browse the 21 topic cards. Completed topics show your best score percentage.
 2. **Theory screen** — tap any topic to read the grammar structure, rules, and examples before testing yourself.
 3. **Start Quiz** — tap the button at the bottom of the theory screen. The AI generates 20 fresh questions in a few seconds.
 4. **Answer questions** — tap an option. Correct answers turn green; wrong answers turn red and a bottom sheet pops up with an explanation.
