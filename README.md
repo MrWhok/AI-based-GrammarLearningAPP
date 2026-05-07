@@ -59,7 +59,6 @@ cp lib/core/constants/api_constants.example.dart lib/core/constants/api_constant
 
 Then open `lib/core/constants/api_constants.dart` and replace `YOUR_GROQ_API_KEY_HERE` with your key from [console.groq.com](https://console.groq.com).
 
-> Your key is gitignored and will never be committed.
 
 ### 4. Run the app
 
@@ -142,8 +141,4 @@ lib/
 - **Riverpod `autoDispose`** — the quiz state provider is scoped to the quiz screen and auto-disposed when you leave, preventing stale data.
 - **JSON mode** — Groq's `response_format: {type: "json_object"}` forces the LLM to return valid, parseable JSON every time.
 
----
 
-## License
-
-MIT
