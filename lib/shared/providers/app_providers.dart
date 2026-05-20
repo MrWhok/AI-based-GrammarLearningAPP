@@ -1,9 +1,37 @@
+import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import '../../data/database/isar_service.dart';
 import '../../data/database/topic_progress.dart';
 import '../../data/services/gemini_service.dart';
 import '../../features/quiz/quiz_notifier.dart';
 import '../../features/quiz/quiz_state.dart';
+
+// ── Theme ─────────────────────────────────────────────────────────────────────
+
+class ThemeNotifier extends StateNotifier<ThemeMode> {
+  static const _key = 'theme_mode';
+  final SharedPreferences _prefs;
+
+  ThemeNotifier(this._prefs)
+      : super(
+          _prefs.getString(_key) == 'dark' ? ThemeMode.dark : ThemeMode.light,
+        );
+
+  void toggle() {
+    final next =
+        state == ThemeMode.light ? ThemeMode.dark : ThemeMode.light;
+    state = next;
+    _prefs.setString(_key, next == ThemeMode.dark ? 'dark' : 'light');
+  }
+}
+
+final themeNotifierProvider =
+    StateNotifierProvider<ThemeNotifier, ThemeMode>(
+  (ref) => throw UnimplementedError('Override in ProviderScope'),
+);
+
+// ── Database ──────────────────────────────────────────────────────────────────
 
 // Initialized in main.dart and overridden in ProviderScope
 final isarServiceProvider = Provider<IsarService>(

@@ -82,7 +82,6 @@ class _QuizResultScreenState extends ConsumerState<QuizResultScreen>
         .toList();
 
     return Scaffold(
-      backgroundColor: AppTheme.surface,
       body: CustomScrollView(
         slivers: [
           SliverAppBar(
@@ -104,7 +103,10 @@ class _QuizResultScreenState extends ConsumerState<QuizResultScreen>
                     gradient: LinearGradient(
                       begin: Alignment.topCenter,
                       end: Alignment.bottomCenter,
-                      colors: [widget.topic.color, AppTheme.surface],
+                      colors: [
+                        widget.topic.color,
+                        Theme.of(context).colorScheme.surface
+                      ],
                     ),
                   ),
                   padding: const EdgeInsets.fromLTRB(24, 32, 24, 32),
@@ -228,7 +230,7 @@ class _QuizResultScreenState extends ConsumerState<QuizResultScreen>
                           style: GoogleFonts.poppins(
                             fontSize: 14,
                             fontWeight: FontWeight.w600,
-                            color: Colors.grey.shade800,
+                            color: Theme.of(context).colorScheme.onSurface,
                           ),
                         ),
                         const SizedBox(width: 8),
@@ -236,7 +238,7 @@ class _QuizResultScreenState extends ConsumerState<QuizResultScreen>
                           padding: const EdgeInsets.symmetric(
                               horizontal: 8, vertical: 2),
                           decoration: BoxDecoration(
-                            color: AppTheme.incorrectLight,
+                            color: AppTheme.adaptiveIncorrectBg(context),
                             borderRadius: BorderRadius.circular(20),
                           ),
                           child: Text(
@@ -344,9 +346,10 @@ class _StatCard extends StatelessWidget {
       child: Container(
         padding: const EdgeInsets.symmetric(vertical: 14, horizontal: 10),
         decoration: BoxDecoration(
-          color: Colors.white,
+          color: Theme.of(context).colorScheme.surfaceContainerLow,
           borderRadius: BorderRadius.circular(12),
-          border: Border.all(color: Colors.grey.shade200),
+          border: Border.all(
+              color: Theme.of(context).colorScheme.outlineVariant),
         ),
         child: Column(
           children: [
@@ -362,7 +365,9 @@ class _StatCard extends StatelessWidget {
             ),
             Text(
               label,
-              style: TextStyle(fontSize: 11, color: Colors.grey.shade600),
+              style: TextStyle(
+                  fontSize: 11,
+                  color: Theme.of(context).colorScheme.onSurfaceVariant),
             ),
           ],
         ),
@@ -401,9 +406,10 @@ class _ReviewCardState extends State<_ReviewCard> {
       padding: const EdgeInsets.fromLTRB(16, 0, 16, 8),
       child: Container(
         decoration: BoxDecoration(
-          color: Colors.white,
+          color: Theme.of(context).colorScheme.surfaceContainerLow,
           borderRadius: BorderRadius.circular(12),
-          border: Border.all(color: Colors.grey.shade200),
+          border: Border.all(
+              color: Theme.of(context).colorScheme.outlineVariant),
         ),
         child: Column(
           children: [
@@ -454,7 +460,9 @@ class _ReviewCardState extends State<_ReviewCard> {
               ),
             ),
             if (_expanded) ...[
-              Divider(height: 1, color: Colors.grey.shade200),
+              Divider(
+                  height: 1,
+                  color: Theme.of(context).colorScheme.outlineVariant),
               Padding(
                 padding: const EdgeInsets.all(14),
                 child: Column(
@@ -474,14 +482,16 @@ class _ReviewCardState extends State<_ReviewCard> {
                       width: double.infinity,
                       padding: const EdgeInsets.all(12),
                       decoration: BoxDecoration(
-                        color: Colors.grey.shade50,
+                        color: Theme.of(context)
+                            .colorScheme
+                            .surfaceContainerLowest,
                         borderRadius: BorderRadius.circular(8),
                       ),
                       child: Text(
                         widget.question.explanation,
                         style: TextStyle(
                           fontSize: 13,
-                          color: Colors.grey.shade700,
+                          color: Theme.of(context).colorScheme.onSurfaceVariant,
                           height: 1.5,
                         ),
                       ),

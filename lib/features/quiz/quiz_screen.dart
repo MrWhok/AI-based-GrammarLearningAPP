@@ -86,7 +86,6 @@ class _QuizScreenState extends ConsumerState<QuizScreen> {
         if (!didPop) _showLeaveDialog();
       },
       child: Scaffold(
-        backgroundColor: AppTheme.surface,
         appBar: AppBar(
           title: Text(widget.topic.title),
           backgroundColor: widget.topic.color,
@@ -182,9 +181,10 @@ class _QuizScreenState extends ConsumerState<QuizScreen> {
                     width: double.infinity,
                     padding: const EdgeInsets.all(20),
                     decoration: BoxDecoration(
-                      color: Colors.white,
+                      color: Theme.of(context).colorScheme.surfaceContainerLow,
                       borderRadius: BorderRadius.circular(16),
-                      border: Border.all(color: Colors.grey.shade200),
+                      border: Border.all(
+                          color: Theme.of(context).colorScheme.outlineVariant),
                       boxShadow: [
                         BoxShadow(
                           color: Colors.black.withValues(alpha: 0.04),
@@ -209,21 +209,22 @@ class _QuizScreenState extends ConsumerState<QuizScreen> {
                 ...question.options.asMap().entries.map((entry) {
                   final idx = entry.key;
                   final optionText = entry.value;
+                  final cs = Theme.of(context).colorScheme;
 
-                  Color bgColor = Colors.white;
-                  Color borderColor = Colors.grey.shade300;
-                  Color textColor = Colors.grey.shade800;
+                  Color bgColor = cs.surfaceContainerLow;
+                  Color borderColor = cs.outlineVariant;
+                  Color textColor = cs.onSurface;
                   Widget? trailingIcon;
 
                   if (isAnswered) {
                     if (idx == correctIndex) {
-                      bgColor = AppTheme.correctLight;
+                      bgColor = AppTheme.adaptiveCorrectBg(context);
                       borderColor = AppTheme.correct;
                       textColor = AppTheme.correct;
                       trailingIcon = const Icon(Icons.check_circle_rounded,
                           color: AppTheme.correct, size: 20);
                     } else if (idx == selectedIndex) {
-                      bgColor = AppTheme.incorrectLight;
+                      bgColor = AppTheme.adaptiveIncorrectBg(context);
                       borderColor = AppTheme.incorrect;
                       textColor = AppTheme.incorrect;
                       trailingIcon = const Icon(Icons.cancel_rounded,
@@ -445,7 +446,7 @@ class _ExplanationSheet extends StatelessWidget {
     return Container(
       margin: const EdgeInsets.all(16),
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: Theme.of(context).colorScheme.surface,
         borderRadius: BorderRadius.circular(20),
       ),
       padding: EdgeInsets.fromLTRB(
@@ -480,7 +481,7 @@ class _ExplanationSheet extends StatelessWidget {
             width: double.infinity,
             padding: const EdgeInsets.all(14),
             decoration: BoxDecoration(
-              color: AppTheme.correctLight,
+              color: AppTheme.adaptiveCorrectBg(context),
               borderRadius: BorderRadius.circular(10),
               border: Border.all(
                   color: AppTheme.correct.withValues(alpha: 0.3)),

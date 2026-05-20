@@ -16,7 +16,6 @@ class HomeScreen extends ConsumerWidget {
     final progressAsync = ref.watch(allProgressProvider);
 
     return Scaffold(
-      backgroundColor: AppTheme.surface,
       body: progressAsync.when(
         loading: () => const Center(child: CircularProgressIndicator()),
         error: (err, _) => Center(child: Text('Error loading progress: $err')),
@@ -33,6 +32,18 @@ class HomeScreen extends ConsumerWidget {
                 expandedHeight: 180,
                 pinned: true,
                 backgroundColor: AppTheme.primary,
+                actions: [
+                  IconButton(
+                    icon: Icon(
+                      ref.watch(themeNotifierProvider) == ThemeMode.dark
+                          ? Icons.light_mode_rounded
+                          : Icons.dark_mode_rounded,
+                      color: Colors.white,
+                    ),
+                    onPressed: () =>
+                        ref.read(themeNotifierProvider.notifier).toggle(),
+                  ),
+                ],
                 flexibleSpace: FlexibleSpaceBar(
                   titlePadding:
                       const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
@@ -99,7 +110,7 @@ class HomeScreen extends ConsumerWidget {
                     style: GoogleFonts.poppins(
                       fontSize: 16,
                       fontWeight: FontWeight.w600,
-                      color: Colors.grey.shade800,
+                      color: Theme.of(context).colorScheme.onSurface,
                     ),
                   ),
                 ),
@@ -177,7 +188,7 @@ class _TopicCard extends StatelessWidget {
                       padding: const EdgeInsets.symmetric(
                           horizontal: 7, vertical: 3),
                       decoration: BoxDecoration(
-                        color: AppTheme.correctLight,
+                        color: AppTheme.adaptiveCorrectBg(context),
                         borderRadius: BorderRadius.circular(20),
                       ),
                       child: Text(
@@ -205,7 +216,7 @@ class _TopicCard extends StatelessWidget {
                 child: Text(
                   topic.shortDescription,
                   style: TextStyle(
-                    color: Colors.grey.shade600,
+                    color: Theme.of(context).colorScheme.onSurfaceVariant,
                     fontSize: 11.5,
                   ),
                   maxLines: 2,
@@ -222,7 +233,10 @@ class _TopicCard extends StatelessWidget {
                     Text(
                       'Best: $score/$total',
                       style: TextStyle(
-                          fontSize: 11, color: Colors.grey.shade600),
+                          fontSize: 11,
+                          color: Theme.of(context)
+                              .colorScheme
+                              .onSurfaceVariant),
                     ),
                   ] else ...[
                     Icon(Icons.play_circle_outline_rounded,
